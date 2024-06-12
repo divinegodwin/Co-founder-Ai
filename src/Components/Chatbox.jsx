@@ -1,4 +1,9 @@
 const ChatBox = () => {
+ 
+  //const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest"});
+
+
+ 
   return (
     <div>
       <div className="fixed bottom-2 w-full">

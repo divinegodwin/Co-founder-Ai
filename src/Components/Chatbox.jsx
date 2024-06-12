@@ -6,7 +6,7 @@ const ChatBox = () => {
  
   return (
     <div>
-      <div className="fixed bottom-2 w-full flex flex-row px-2 fixed">
+      <div className=" bottom-2 w-full flex flex-row px-2 fixed">
         <input
           type="text"
           className=" w-[250px] max-w-[270px] h-[50px] ml-4 pl-3 px-2 rounded-2xl border-2 border-slate-500 outline-[#50c878]"

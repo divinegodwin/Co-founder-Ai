@@ -6,13 +6,15 @@ const ChatBox = () => {
  
   return (
     <div>
-      <div className="fixed bottom-2 w-full">
+      <div className="fixed bottom-2 w-full flex flex-row px-2">
         <input
           type="text"
-          className="w-[270px] h-[50px] ml-4 pl-3 px-2 rounded-2xl  border-2 border-slate-500 outline-[#50c878]"
+          className=" w-[250px] max-w-[270px] h-[50px] ml-4 pl-3 px-2 rounded-2xl border-2 border-slate-500 outline-[#50c878]"
         ></input>
+
+        <div className="flex flex-row px-5">
         <svg
-        className="w-[30px] absolute bottom-2 right-16"
+        className="w-[30px] absolute bottom-2 right-14"
           data-slot="icon"
           fill="none"
           strokeWidth="1.5"
@@ -43,6 +45,8 @@ const ChatBox = () => {
             d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
           ></path>
         </svg>
+        </div>
+
       </div>
     </div>
   );

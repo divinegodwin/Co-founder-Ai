@@ -1,7 +1,7 @@
 const Navbar = () => {
   return (
     <div>
-      <nav className="bg-[#50c878] w-full h-[70px] flex flex-row">
+      <nav className="bg-[#50c878] w-full h-[70px] flex flex-row fixed">
         <div className="w-[50px] h-[50px] bg-black text-white rounded-full m-2 flex justify-center mt-2 ">
         
           <p className="absolute pt-3 text-center">CFA</p>

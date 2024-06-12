@@ -6,15 +6,15 @@ const ChatBox = () => {
  
   return (
     <div>
-      <div className=" bottom-2 w-full flex flex-row px-2 fixed">
+      <div className=" bottom-0 flex flex-row px-2 fixed bg-[#f2f2f2] h-[80px] w-full shadow-lg">
         <input
           type="text"
-          className=" w-[250px] max-w-[270px] h-[50px] ml-4 pl-3 px-2 rounded-2xl border-2 border-slate-500 outline-[#50c878]"
+          className=" my-4 w-[250px] max-w-[270px] h-[50px] ml-4 pl-3 px-2 rounded-2xl border-2 border-[#323332]"
         ></input>
 
-        <div className="flex flex-row px-5">
+        <div className="flex flex-row px-5 py-7">
         <svg
-        className="w-[30px] absolute bottom-2 right-14"
+        className="w-[30px] absolute right-14"
           data-slot="icon"
           fill="none"
           strokeWidth="1.5"
@@ -30,7 +30,7 @@ const ChatBox = () => {
           ></path>
         </svg>
         <svg
-          className="w-[30px] absolute bottom-2 right-5"
+          className="w-[30px] absolute right-5"
           data-slot="icon"
           fill="none"
           strokeWidth="1.5"

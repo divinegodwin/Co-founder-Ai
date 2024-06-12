@@ -6,7 +6,9 @@ const Navbar = () => {
         
           <p className="absolute pt-3 text-center">CFA</p>
         </div>
-        <h1 className="pl-2 pt-6 font-bold text-white">Co-Founder AI</h1>
+        <header>
+        <p className="pl-2 pt-5 font-bold text-white text-lg">Co-Founder AI</p>
+        </header>
       </nav>
     </div>
   );

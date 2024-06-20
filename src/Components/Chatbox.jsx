@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
 
 const ChatBox = () => {
-  const apiKey = "AIzaSyC_cf5EcdRlNs2uKItv4TGXENlfAsKZWns";
+  //const apiKey = "AIzaSyC_cf5EcdRlNs2uKItv4TGXENlfAsKZWns";
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 

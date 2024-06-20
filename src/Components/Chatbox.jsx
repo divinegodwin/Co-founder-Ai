@@ -2,42 +2,75 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
 
 const ChatBox = () => {
-
-  const apiKey = 'AlzaSyA76U1ZI_JZCAOw5xgOv_fdO1VoCH2KDng'
-  const genAI = new GoogleGenerativeAI(apiKey)
+  const apiKey = "AIzaSyC_cf5EcdRlNs2uKItv4TGXENlfAsKZWns";
+  const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  const [userPrompt, setUserPrompt] = useState("")
+  const [userPrompt, setUserPrompt] = useState("");
 
-  const[generatedText, setGeneratedText] =useState("")
+  const [generatedText, setGeneratedText] = useState([]);
+
+  const [status, setStatus] = useState("");
+
+  const [isUserPrompt, setIsUserPrompt] = useState(false)
 
   const Generate = async () => {
-
-    console.log('hi')
     
     try {
-      const result = await model.generateContent(userPrompt);
-      const response = await result.response;
-      const text = response.text();
-      setGeneratedText(text); 
-      console.log(text);
+      if (userPrompt !== "") {
+        setStatus("loading");
+        setIsUserPrompt(!isUserPrompt)
+        setUserPrompt("")
+        console.log(status);
+        const result = await model.generateContent(userPrompt);
+        const response = await result.response;
+        const text = response.text();
+        setGeneratedText((previousResponse) => [...previousResponse, text]);
+
+      }
     } catch (error) {
       console.error(error);
     }
+    setStatus("");
   };
-  
+
   return (
     <div>
+      <div className="text-lg">{status}</div>
+
+      <section >
+        {generatedText.map((text, index) => (
+          <div
+            key={index}
+            className="mt-[8rem] w-[300px] px-4 rounded-lg flex m-w-2xl bg-black text-white"
+          >
+            {text}
+          </div>
+
+        
+        ))}
+      </section>
+
+<div>
+          { isUserPrompt&&(
+             <div className="mt-[8rem] w-[100px] h-[2rem] px-4 py-2 rounded-lg flex m-w-2xl bg-black text-white">
+             {userPrompt}
+           </div>
+          )
+
+          }
+
+</div>
+     
+
       <div className=" bottom-0 flex flex-row px-2 fixed bg-[#f2f2f2] h-[80px] w-full shadow-lg">
         <input
-          onChange={(e)=>setUserPrompt(e.target.value) }
           type="text"
           className=" my-4 w-[250px] max-w-[270px] h-[50px] ml-4 pl-3 px-2 rounded-2xl border-2 border-[#323332]"
         ></input>
 
         <div className="flex flex-row px-5 py-7">
           <svg
-          
             className="w-[30px] absolute right-14"
             data-slot="icon"
             fill="none"
@@ -72,12 +105,9 @@ const ChatBox = () => {
             ></path>
           </svg>
         </div>
-
       </div>
 
-    
-          <div>{generatedText}</div>
-      
+     
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
 
 const ChatBox = () => {
+  const apiKey =  import.meta.env.VITE_APP_GENERATIVE_AI_KEY;
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -11,59 +12,51 @@ const ChatBox = () => {
 
   const [status, setStatus] = useState("");
 
-  const [isUserPrompt, setIsUserPrompt] = useState(false)
+  const HandleUserPrompt = (e) => {
+    setUserPrompt(e.target.value);
+  };
 
   const Generate = async () => {
-    
+    setUserPrompt("");
     try {
       if (userPrompt !== "") {
         setStatus("loading");
-        setIsUserPrompt(!isUserPrompt)
-        setUserPrompt("")
         console.log(status);
         const result = await model.generateContent(userPrompt);
         const response = await result.response;
         const text = response.text();
         setGeneratedText((previousResponse) => [...previousResponse, text]);
-
       }
     } catch (error) {
       console.error(error);
     }
-    setStatus("");
+    setStatus("")
   };
 
   return (
     <div>
       <div className="text-lg">{status}</div>
 
-      <section >
+      <section>
         {generatedText.map((text, index) => (
           <div
             key={index}
-            className="mt-[8rem] w-[300px] px-4 rounded-lg flex m-w-2xl bg-black text-white"
+            className="ml-2 mt-[8rem] w-fit  px-4 rounded-lg m-h-[600px]  py-2 flex m-w-2xl bg-black text-white"
           >
             {text}
           </div>
-
-        
         ))}
       </section>
 
-<div>
-          { isUserPrompt&&(
-             <div className="mt-[8rem] w-[100px] h-[2rem] px-4 py-2 rounded-lg flex m-w-2xl bg-black text-white">
-             {userPrompt}
-           </div>
-          )
-
-          }
-
-</div>
-     
+      
+        <div className="ml-2 mt-[8rem] w-fit  px-4 rounded-lg   py-2 flex m-w-2xl bg-black text-white">
+          {userPrompt}
+        </div>
+    
 
       <div className=" bottom-0 flex flex-row px-2 fixed bg-[#f2f2f2] h-[80px] w-full shadow-lg">
         <input
+          onChange={HandleUserPrompt}
           type="text"
           className=" my-4 w-[250px] max-w-[270px] h-[50px] ml-4 pl-3 px-2 rounded-2xl border-2 border-[#323332]"
         ></input>
@@ -105,8 +98,6 @@ const ChatBox = () => {
           </svg>
         </div>
       </div>
-
-     
     </div>
   );
 };

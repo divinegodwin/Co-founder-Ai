@@ -34,8 +34,8 @@ const ChatBox = () => {
   }
 
   const Generate = async () => {
-    
-    setUserPrompt("");
+    setIsLoading(false)
+    if (userPrompt.trim() === "") return;
     try {
       setMessages((previousMessages) => [
         ...previousMessages,
@@ -44,7 +44,7 @@ const ChatBox = () => {
           sender: "user",
         },
       ]);
-      if (userPrompt.trim() === "") return;
+    
       setProcessing(true);
       const result = await model.generateContent(userPrompt);
       const response = await result.response;
@@ -61,6 +61,7 @@ const ChatBox = () => {
       console.error(error);
     } finally {
       setProcessing(false);
+      setUserPrompt('')
     }
   };
 

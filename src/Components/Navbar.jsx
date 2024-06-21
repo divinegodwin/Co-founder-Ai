@@ -1,7 +1,7 @@
 const Navbar = () => {
   return (
     <div>
-      <nav className="bg-[rgb(50,51,50)] w-full h-[80px] flex flex-row pl-2 top-0  fixed">
+      <nav className="bg-[rgb(50,51,50)] w-full h-[80px] flex flex-row pl-2 top-0 fixed ">
 
         <div className="flex flex-row pt-1"> 
 

@@ -8,55 +8,76 @@ const ChatBox = () => {
 
   const [userPrompt, setUserPrompt] = useState("");
 
-  const [generatedText, setGeneratedText] = useState([]);
+  const [messages, setMessages] = useState([]);
 
   const [status, setStatus] = useState("");
 
-  const HandleUserPrompt = (e) => {
-    setUserPrompt(e.target.value);
-  };
+  function handleInput (e){
+    setUserPrompt(e.target.value)
+  }
 
+
+ 
   const Generate = async () => {
     setUserPrompt("");
     try {
-      if (userPrompt !== "") {
+      setMessages((previousMessages) => [
+        ...previousMessages,
+        {
+          text: userPrompt,
+          sender: 'user',
+        }
+      ])
+      if (userPrompt.trim() === "") return;
+
         setStatus("loading");
         console.log(status);
         const result = await model.generateContent(userPrompt);
         const response = await result.response;
-        const text = response.text();
-        setGeneratedText((previousResponse) => [...previousResponse, text]);
-      }
+        const aiText = response.text();
+        setMessages((previousMessages) => [ 
+          ...previousMessages,
+          {
+            text: aiText,
+            sender: 'ai',
+          }
+           
+          ]);
+        setUserPrompt('')
     } catch (error) {
       console.error(error);
-    }
+    }finally{
     setStatus("")
+    }
   };
 
-  return (
-    <div>
-      <div className="text-lg">{status}</div>
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      Generate();
+    }
+  }
 
-      <section>
-        {generatedText.map((text, index) => (
+  return (
+    <div className="mt-[5rem] mb-[8rem]">
+      
+
+      <section className="p-2">
+        {messages.map((message, index) => (
           <div
             key={index}
-            className="ml-2 mt-[8rem] w-fit  px-4 rounded-lg m-h-[600px]  py-2 flex m-w-2xl bg-black text-white"
+            className={`${message.sender === "user" ? "text-right bg-blue-500" : "text-left bg-black"} ml-2 mt-[2rem] w-fit  px-4 rounded-lg py-2 flex m-w-2xl text-white` }
           >
-            {text}
+            {message.text}
           </div>
         ))}
       </section>
 
-      
-        <div className="ml-2 mt-[8rem] w-fit  px-4 rounded-lg   py-2 flex m-w-2xl bg-black text-white">
-          {userPrompt}
-        </div>
-    
+      <div className="text-lg">{status}</div>
 
       <div className=" bottom-0 flex flex-row px-2 fixed bg-[#f2f2f2] h-[80px] w-full shadow-lg">
         <input
-          onChange={HandleUserPrompt}
+        value={userPrompt}
+        onChange={handleInput}
           type="text"
           className=" my-4 w-[250px] max-w-[270px] h-[50px] ml-4 pl-3 px-2 rounded-2xl border-2 border-[#323332]"
         ></input>
@@ -81,6 +102,7 @@ const ChatBox = () => {
 
           <svg
             onClick={Generate}
+            onKeyDown={handleKeyPress}
             className="w-[30px] absolute right-5"
             data-slot="icon"
             fill="none"

@@ -1,29 +1,41 @@
 
+/* HTML: <div class="loader"></div> */
 .loader {
-    width: 100px;
-    height: 40px;
-    --g: radial-gradient(farthest-side,#0000 calc(95% - 3px),#fff calc(100% - 3px) 98%,#0000 101%) no-repeat;
-    background: var(--g), var(--g), var(--g);
-    background-size: 30px 30px;
-    animation: l9 1s infinite alternate;
-  }
-  @keyframes l9 {
-    0% {
-      background-position: 0 50%, 50% 50%, 100% 50%;
-    }
-    20% {
-      background-position: 0 0, 50% 50%, 100% 50%;
-    }
-    40% {
-      background-position: 0 100%, 50% 0, 100% 50%;
-    }
-    60% {
-      background-position: 0 50%, 50% 100%, 100% 0;
-    }
-    80% {
-      background-position: 0 50%, 50% 50%, 100% 100%;
-    }
-    100% {
-      background-position: 0 50%, 50% 50%, 100% 50%;
-    }
-  }
+  width: 85px;
+  height: 35px;
+  --g1:conic-gradient(from  90deg at 3px  3px ,#0000 90deg,#000 0);
+  --g2:conic-gradient(from -90deg at 22px 22px,#0000 90deg,#000 0);
+  background:var(--g1),var(--g1),var(--g1), var(--g2),var(--g2),var(--g2);
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  animation: l6 1s infinite alternate;
+}
+@keyframes l6 {
+  0%   {background-position:0 50% ,50% 50% ,100% 50% }
+  20%  {background-position:0 0   ,50% 50% ,100% 50% }
+  40%  {background-position:0 100%,50%  0  ,100% 50% }
+  60%  {background-position:0 50% ,50% 100%,100% 0   }
+  80%  {background-position:0 50% ,50% 50% ,100% 100%}
+  100% {background-position:0 50% ,50% 50% ,100% 50% }
+}
+
+.bg-loader {
+  width: 85px;
+  height: 50px;
+  --g1:conic-gradient(from  90deg at left   3px top   3px,#0000 90deg,#000 0);
+  --g2:conic-gradient(from -90deg at bottom 3px right 3px,#0000 90deg,#000 0);
+  background: var(--g1),var(--g1),var(--g1), var(--g2),var(--g2),var(--g2);
+  background-position: left,center,right;
+  background-repeat: no-repeat;
+  animation: l10 1s infinite alternate;
+}
+@keyframes l10 {
+  0%,
+  2%   {background-size:25px 50% ,25px 50% ,25px 50%}
+  20%  {background-size:25px 25% ,25px 50% ,25px 50%}
+  40%  {background-size:25px 100%,25px 25% ,25px 50%}
+  60%  {background-size:25px 50% ,25px 100%,25px 25%}
+  80%  {background-size:25px 50% ,25px 50% ,25px 100%}
+  98%,
+  100% {background-size:25px 50% ,25px 50% ,25px 50%}
+}

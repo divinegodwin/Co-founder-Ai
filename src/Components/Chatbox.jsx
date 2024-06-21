@@ -1,52 +1,66 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Loader from "./Loader";
+import '../App.css';
+import BackgroundLoader from "./BackgroundLoader";
 
 const ChatBox = () => {
-  const apiKey =  import.meta.env.VITE_APP_GENERATIVE_AI_KEY;
-  const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const [userPrompt, setUserPrompt] = useState("");
 
   const [messages, setMessages] = useState([]);
 
-  const [gettingResponse, setGettingResponse] = useState(false);
+  const [processing, setProcessing] = useState(false);
 
-  function handleInput (e){
-    setUserPrompt(e.target.value)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() =>{
+      const loaderTimer = setInterval(()=>{
+          setIsLoading(false)
+      }, 5000)
+
+      return ()=> clearInterval(loaderTimer)
+  },[])
+
+  const apiKey = import.meta.env.VITE_APP_GENERATIVE_AI_KEY;
+
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+  
+  
+  function handleInput(e) {
+    setUserPrompt(e.target.value);
   }
 
-
- 
   const Generate = async () => {
+    
     setUserPrompt("");
     try {
       setMessages((previousMessages) => [
         ...previousMessages,
         {
           text: userPrompt,
-          sender: 'user',
-        }
-      ])
+          sender: "user",
+        },
+      ]);
       if (userPrompt.trim() === "") return;
-        setGettingResponse(true)
-        const result = await model.generateContent(userPrompt);
-        const response = await result.response;
-        const aiText = response.text();
-        setMessages((previousMessages) => [ 
-          ...previousMessages,
-          {
-            text: aiText,
-            sender: 'ai',
-          }
-           
-          ]);
-        setUserPrompt('')
+      setProcessing(true);
+      const result = await model.generateContent(userPrompt);
+      const response = await result.response;
+      const aiText = response.text();
+      setMessages((previousMessages) => [
+        ...previousMessages,
+        {
+          text: aiText,
+          sender: "ai",
+        },
+      ]);
+      setUserPrompt("");
     } catch (error) {
       console.error(error);
-    }finally{
-    setGettingResponse(false)
+    } finally {
+      setProcessing(false);
     }
   };
 
@@ -54,33 +68,34 @@ const ChatBox = () => {
     if (e.key === "Enter") {
       Generate();
     }
-  }
+  };
 
   return (
     <div className="mt-[5rem] mb-[8rem]">
-      
+     
+{isLoading && <BackgroundLoader /> }
 
       <section className="p-2">
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`${message.sender === "user" ? "text-right bg-blue-500" : "text-left bg-black"} ml-2 mt-[2rem] w-fit  px-4 rounded-lg py-2 flex m-w-2xl text-white` }
+            className={`${
+              message.sender === "user"
+                ? "text-right bg-blue-500"
+                : "text-left bg-black"
+            } ml-2 mt-[2rem] w-fit  px-4 rounded-lg py-2 flex m-w-2xl text-white`}
           >
             {message.text}
           </div>
         ))}
       </section>
 
-     {
-      gettingResponse &&  (
-        <Loader />
-      )
-     }
+      {processing && <Loader />}
 
       <div className=" bottom-0 flex flex-row px-2 fixed bg-[#f2f2f2] h-[80px] w-full shadow-lg">
         <input
-        value={userPrompt}
-        onChange={handleInput}
+          value={userPrompt}
+          onChange={handleInput}
           type="text"
           className=" my-4 w-[250px] max-w-[270px] h-[50px] ml-4 pl-3 px-2 rounded-2xl border-2 border-[#323332]"
         ></input>

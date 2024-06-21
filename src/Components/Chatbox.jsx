@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
+import Loader from "./Loader";
 
 const ChatBox = () => {
   const apiKey =  import.meta.env.VITE_APP_GENERATIVE_AI_KEY;
@@ -10,7 +11,7 @@ const ChatBox = () => {
 
   const [messages, setMessages] = useState([]);
 
-  const [status, setStatus] = useState("");
+  const [gettingResponse, setGettingResponse] = useState(false);
 
   function handleInput (e){
     setUserPrompt(e.target.value)
@@ -29,9 +30,7 @@ const ChatBox = () => {
         }
       ])
       if (userPrompt.trim() === "") return;
-
-        setStatus("loading");
-        console.log(status);
+        setGettingResponse(true)
         const result = await model.generateContent(userPrompt);
         const response = await result.response;
         const aiText = response.text();
@@ -47,7 +46,7 @@ const ChatBox = () => {
     } catch (error) {
       console.error(error);
     }finally{
-    setStatus("")
+    setGettingResponse(false)
     }
   };
 
@@ -72,7 +71,11 @@ const ChatBox = () => {
         ))}
       </section>
 
-      <div className="text-lg">{status}</div>
+     {
+      gettingResponse &&  (
+        <Loader />
+      )
+     }
 
       <div className=" bottom-0 flex flex-row px-2 fixed bg-[#f2f2f2] h-[80px] w-full shadow-lg">
         <input

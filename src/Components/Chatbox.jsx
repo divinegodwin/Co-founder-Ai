@@ -65,6 +65,9 @@ const ChatBox = () => {
     }
   };
 
+  const HandleMic = ()=>{
+    alert('feature\'s comming soon')
+  }
   //const {//speech recognition state
    // transcript,
     //browserSupportSpeechRecognition,
@@ -76,7 +79,7 @@ const ChatBox = () => {
 
   return (
     <div className="mt-[5rem] mb-[8rem]">
-      {isLoading && <BackgroundLoader />}
+      {isLoading && <BackgroundLoader /> }
 
       <section className="p-2">
         {messages.map((message, index) => (
@@ -106,6 +109,7 @@ const ChatBox = () => {
 
         <div className="flex flex-row px-5 py-7">
           <svg
+          onClick={HandleMic}
             className="w-[30px] absolute right-14"
             data-slot="icon"
             fill="none"

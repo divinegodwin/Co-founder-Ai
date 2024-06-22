@@ -66,7 +66,7 @@ const ChatBox = () => {
   };
 
   const HandleMic = ()=>{
-    alert('feature\'s comming soon')
+    alert('feature comming soon')
   }
   //const {//speech recognition state
    // transcript,
@@ -104,7 +104,7 @@ const ChatBox = () => {
           value={userPrompt}
           onChange={handleInput}
           type="text"
-          className=" my-4 w-[250px] max-w-[270px] h-[50px] ml-4 pl-3 px-2 rounded-2xl border-2 border-[#323332]"
+          className=" my-4 w-[250px] max-w-[270px] h-[50px] ml-4 pl-3 px-2 rounded-2xl border-2 border-[#323332] outline-none"
         ></input>
 
         <div className="flex flex-row px-5 py-7">

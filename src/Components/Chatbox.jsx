@@ -1,40 +1,35 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState, useEffect } from "react";
 import Loader from "./Loader";
-import '../App.css';
+import "../App.css";
 import BackgroundLoader from "./BackgroundLoader";
+//import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition'
+
 
 const ChatBox = () => {
-
   const [userPrompt, setUserPrompt] = useState("");
-
   const [messages, setMessages] = useState([]);
-
   const [processing, setProcessing] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [isLoading, setIsLoading] = useState(true)
+  useEffect(() => {
+    const loaderTimer = setInterval(() => {
+      setIsLoading(false);
+    }, 5000);
 
-  useEffect(() =>{
-      const loaderTimer = setInterval(()=>{
-          setIsLoading(false)
-      }, 5000)
-
-      return ()=> clearInterval(loaderTimer)
-  },[])
+    return () => clearInterval(loaderTimer);
+  }, []);
 
   const apiKey = import.meta.env.VITE_APP_GENERATIVE_AI_KEY;
-
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  
-  
   function handleInput(e) {
     setUserPrompt(e.target.value);
   }
 
   const Generate = async () => {
-    setIsLoading(false)
+    setIsLoading(false);
     if (userPrompt.trim() === "") return;
     try {
       setMessages((previousMessages) => [
@@ -44,7 +39,6 @@ const ChatBox = () => {
           sender: "user",
         },
       ]);
-    
       setProcessing(true);
       const result = await model.generateContent(userPrompt);
       const response = await result.response;
@@ -61,20 +55,28 @@ const ChatBox = () => {
       console.error(error);
     } finally {
       setProcessing(false);
-      setUserPrompt('')
+      setUserPrompt("");
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       Generate();
     }
   };
 
+  //const {//speech recognition state
+   // transcript,
+    //browserSupportSpeechRecognition,
+ // } = useSpeechRecognition()
+
+ // if(!browserSupportSpeechRecognition){
+ //   return <span>yuur browser does not support speech to text recongnition </span>
+//  }
+
   return (
     <div className="mt-[5rem] mb-[8rem]">
-     
-{isLoading && <BackgroundLoader /> }
+      {isLoading && <BackgroundLoader />}
 
       <section className="p-2">
         {messages.map((message, index) => (
@@ -93,6 +95,7 @@ const ChatBox = () => {
 
       {processing && <Loader />}
 
+{/*<div><p>{transcript}</p></div>*/}
       <div className=" bottom-0 flex flex-row px-2 fixed bg-[#f2f2f2] h-[80px] w-full shadow-lg">
         <input
           value={userPrompt}
@@ -121,7 +124,7 @@ const ChatBox = () => {
 
           <svg
             onClick={Generate}
-            onKeyDown={handleKeyPress}
+            onKeyDown={handleKeyDown}
             className="w-[30px] absolute right-5"
             data-slot="icon"
             fill="none"

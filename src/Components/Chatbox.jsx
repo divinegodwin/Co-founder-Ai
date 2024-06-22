@@ -110,7 +110,7 @@ const ChatBox = () => {
         <div className="flex flex-row px-5 py-7">
           <svg
           onClick={HandleMic}
-            className="w-[30px] absolute right-14"
+            className="w-[30px] absolute right-14 text-blue-500"
             data-slot="icon"
             fill="none"
             strokeWidth="1.5"
@@ -129,7 +129,7 @@ const ChatBox = () => {
           <svg
             onClick={Generate}
             onKeyDown={handleKeyDown}
-            className="w-[30px] absolute right-5"
+            className="w-[30px] absolute right-5 text-blue-500"
             data-slot="icon"
             fill="none"
             strokeWidth="1.5"

@@ -48,7 +48,7 @@ const Navbar = () => {
         <div
           className={`${
             open
-              ? "rounded-lg pt-6 bg-[rgb(50,51,50)] h-[190px] p-4 flex flex-col gap-4 w-[250px] absolute top-16 text-white list-none right-0"
+              ? "rounded-lg pt-6 bg-[rgb(50,51,50)] h-[200px] p-4 flex flex-col gap-4 w-[250px] absolute top-16 text-white list-none right-0"
               : "hidden"
           }`}
         >

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Loader from "./Loader";
 import "../App.css";
 import BackgroundLoader from "./BackgroundLoader";
+import Navbar from "./Navbar";
 //import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition'
 
 
@@ -79,6 +80,8 @@ const ChatBox = () => {
 
   return (
     <div className="mt-[5rem] mb-[8rem]">
+
+    <Navbar />
       {isLoading && <BackgroundLoader /> }
 
       <section className="p-2">

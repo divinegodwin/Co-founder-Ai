@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
@@ -7,8 +7,8 @@ const Navbar = () => {
     setOpen(!open);
   };
 
-  function NavClick (){
-    alert('feature\'s coming soon')
+  function NavClick() {
+    alert("feature's coming soon");
   }
 
   return (
@@ -52,9 +52,8 @@ const Navbar = () => {
               : "hidden"
           }`}
         >
-          <div  className="flex flex-row w-full">
-          <svg
-          
+          <div className="flex flex-row w-full">
+            <svg
               className="w-[30px] "
               data-slot="icon"
               fill="none"
@@ -70,15 +69,38 @@ const Navbar = () => {
                 d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
               ></path>
             </svg>
-            <li onClick={NavClick} className="pt-1 pl-2">New chat</li>
-           
+            <li onClick={NavClick} className="pt-1 pl-2">
+              New chat
+            </li>
           </div>
-          <li onClick={NavClick} className="pl-10">History</li>
-          <li onClick={NavClick} className="pl-10">Theme</li>
+          <div className="flex">
+            <svg
+            className="w-[30px]"
+              data-slot="icon"
+              fill="none"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              ></path>
+            </svg>
+            <li onClick={NavClick} className="pl-2">
+              History
+            </li>
+          </div>
+          <li onClick={NavClick} className="pl-10">
+            Theme
+          </li>
 
           <div className="flex">
-          <svg
-            className="w-[30px] "
+            <svg
+              className="w-[30px] "
               data-slot="icon"
               fill="none"
               strokeWidth="1.5"
@@ -93,8 +115,11 @@ const Navbar = () => {
                 d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
               ></path>
             </svg>
-            <li onClick={NavClick}  className="pl-2 pt-1">Create Account</li>
-            
+            <li className="pl-2 pt-1">
+              <Link to = '/Account'>
+              Create Account
+              </Link>
+            </li>
           </div>
         </div>
       </aside>

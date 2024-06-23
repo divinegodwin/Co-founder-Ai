@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <Router>
-      <div>
-        
+      <div>  
         <Routes>
           <Route exact path="/" element={<ChatBox />} />
           <Route exact path="/Account" element={<Account />} />

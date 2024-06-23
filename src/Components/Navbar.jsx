@@ -7,10 +7,6 @@ const Navbar = () => {
     setOpen(!open);
   };
 
-  function NavClick() {
-    alert("feature's coming soon");
-  }
-
   return (
     <div>
       <nav className="bg-[rgb(50,51,50)] w-full h-[80px] flex flex-row pl-2 top-0 fixed ">
@@ -48,7 +44,7 @@ const Navbar = () => {
         <div
           className={`${
             open
-              ? "rounded-lg pt-6 bg-[rgb(50,51,50)] h-[200px] p-4 flex flex-col gap-4 w-[250px] absolute top-16 text-white list-none right-0"
+              ? "rounded-lg pt-6 bg-[rgb(50,51,50)] h-[205px] p-4 flex flex-col gap-4 w-[250px] absolute top-16 text-white list-none right-0"
               : "hidden"
           }`}
         >
@@ -69,13 +65,13 @@ const Navbar = () => {
                 d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
               ></path>
             </svg>
-            <li onClick={NavClick} className="pt-1 pl-2">
+            <li className="pt-1 pl-2">
               New chat
             </li>
           </div>
           <div className="flex">
             <svg
-            className="w-[30px]"
+              className="w-[30px]"
               data-slot="icon"
               fill="none"
               strokeWidth="1.5"
@@ -90,13 +86,31 @@ const Navbar = () => {
                 d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
               ></path>
             </svg>
-            <li onClick={NavClick} className="pl-2">
+            <li className="pl-2">
               History
             </li>
           </div>
-          <li onClick={NavClick} className="pl-10">
+          <div className="flex">
+          <svg
+          className="w-[30px]"
+            data-slot="icon"
+            fill="none"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m15 11.25 1.5 1.5.75-.75V8.758l2.276-.61a3 3 0 1 0-3.675-3.675l-.61 2.277H12l-.75.75 1.5 1.5M15 11.25l-8.47 8.47c-.34.34-.8.53-1.28.53s-.94.19-1.28.53l-.97.97-.75-.75.97-.97c.34-.34.53-.8.53-1.28s.19-.94.53-1.28L12.75 9M15 11.25 12.75 9"
+            ></path>
+          </svg>
+          <li className="pl-2">
             Theme
           </li>
+          </div>
 
           <div className="flex">
             <svg
@@ -115,10 +129,8 @@ const Navbar = () => {
                 d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
               ></path>
             </svg>
-            <li className="pl-2 pt-1">
-              <Link to = '/Account'>
-              Create Account
-              </Link>
+            <li className="pl-2">
+              <Link to="/Account">Create Account</Link>
             </li>
           </div>
         </div>

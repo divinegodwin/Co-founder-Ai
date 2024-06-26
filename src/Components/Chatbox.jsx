@@ -76,7 +76,7 @@ const ChatBox = ({darkmode}) => {
  // } = useSpeechRecognition()
 
  // if(!browserSupportSpeechRecognition){
- //   return <span>yuur browser does not support speech to text recongnition </span>
+ //   return <span>your browser does not support speech to text recongnition </span>
 //  }
 
   return (

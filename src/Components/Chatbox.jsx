@@ -4,10 +4,11 @@ import Loader from "./Loader";
 import "../App.css";
 import BackgroundLoader from "./BackgroundLoader";
 import Navbar from "./Navbar";
+import PropTypes from 'prop-types'
 //import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition'
 
 
-const ChatBox = () => {
+const ChatBox = ({darkmode}) => {
   const [userPrompt, setUserPrompt] = useState("");
   const [messages, setMessages] = useState([]);
   const [processing, setProcessing] = useState(false);
@@ -79,7 +80,7 @@ const ChatBox = () => {
 //  }
 
   return (
-    <div className="mt-[5rem] mb-[8rem]">
+    <div className={`${darkmode ? "bg-black text-white" : "bg-white text-black"}mt-[5rem] mb-[8rem]`}>
 
     <Navbar />
       {isLoading && <BackgroundLoader /> }
@@ -153,4 +154,7 @@ const ChatBox = () => {
   );
 };
 
+ChatBox.pcropTypes ={
+  darkmode: PropTypes.bool.isRequired,
+}
 export default ChatBox;

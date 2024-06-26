@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-
   const ToggleNav = () => {
     setOpen(!open);
   };
-
+ 
   return (
     <div>
       <nav className="bg-[rgb(50,51,50)] w-full h-[80px] flex flex-row pl-2 top-0 fixed ">
@@ -91,22 +91,13 @@ const Navbar = () => {
             </li>
           </div>
           <div className="flex">
-          <svg
-          className="w-[30px]"
-            data-slot="icon"
-            fill="none"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m15 11.25 1.5 1.5.75-.75V8.758l2.276-.61a3 3 0 1 0-3.675-3.675l-.61 2.277H12l-.75.75 1.5 1.5M15 11.25l-8.47 8.47c-.34.34-.8.53-1.28.53s-.94.19-1.28.53l-.97.97-.75-.75.97-.97c.34-.34.53-.8.53-1.28s.19-.94.53-1.28L12.75 9M15 11.25 12.75 9"
-            ></path>
-          </svg>
+         
+          
+<label className="inline-flex items-center cursor-pointer">
+  <input type="checkbox" value="" className="sr-only peer" ></input>
+  <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+</label>
+
           <li className="pl-2">
             Theme
           </li>
@@ -135,6 +126,7 @@ const Navbar = () => {
           </div>
         </div>
       </aside>
+ 
     </div>
   );
 };

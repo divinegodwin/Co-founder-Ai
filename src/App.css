@@ -38,3 +38,22 @@
   98%,
   100% {background-size:25px 50% ,25px 50% ,25px 50%}
 }
+
+
+.logo{
+  animation-name: logo;
+  animation-duration: 1.5s;
+}
+
+@keyframes logo{
+  from{
+    margin-left: -15rem;
+    transform: rotate(180deg);
+  }
+  to{
+  
+    justify-content: center;
+    transform: rotate(360deg);
+
+  }
+}

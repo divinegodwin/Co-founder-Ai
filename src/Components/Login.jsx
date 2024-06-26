@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import supabase from "../../SupabaseClient";
 
 const Login = () => {
   const [hidden, setHidden] = useState(false);
@@ -59,7 +60,7 @@ const Login = () => {
                 ></path>
               </svg>
             </div>
-            <div className=" flex ">
+            <div className=" flex pr-2 ">
               <svg
                 onClick={PasswordHide}
                 className={`${

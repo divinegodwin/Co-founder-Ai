@@ -64,7 +64,6 @@ try{
       });
       if (signupError) {
         throw signupError
-        
       }
 
       const{error:insertError} = await supabase.from('Accounts')

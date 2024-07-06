@@ -85,7 +85,7 @@ const ChatBox = () => {
     <Navbar />
       {isLoading && <BackgroundLoader /> }
 
-      <section className="p-2">
+      <section className="p-2 mt-[4rem]">
         {messages.map((message, index) => (
           <div
             key={index}

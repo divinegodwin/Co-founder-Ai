@@ -121,7 +121,7 @@ const Navbar = () => {
               ></path>
             </svg>
             <li className="pl-2">
-              <Link to="/Account">Create Account</Link>
+              Create Account
             </li>
           </div>
         </div>
